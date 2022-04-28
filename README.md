@@ -15,7 +15,9 @@ You need to install the following dependencies before you can run this example:
 - sciki-learn
 
 ## How to use
-```python3 knn.py```
+```bash
+python3 knn.py
+```
 
 ## Issues
 if you have any issues, please feel free to fill an issue on the [Issue Page](https://github.com/Dzyfhuba/k-nearest-network-python/issues)
