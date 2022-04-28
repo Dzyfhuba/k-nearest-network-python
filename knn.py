@@ -1,3 +1,11 @@
+# =========================================================================
+#
+# Title     : K-Nearest Neighbor Algorithm
+# Author    : Dzyfhuba
+# GitHub    : https://github.com/Dzyfhuba/k-nearest-network-python.git
+#
+# =========================================================================
+
 import os
 import sys
 import time
