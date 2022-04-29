@@ -34,11 +34,11 @@ ax.legend()
 # plt.show()
 
 # store the plot
-plt.savefig('dataset/dataset_visualization.png')
+# plt.savefig('dataset/dataset_visualization.png')
 
 # get train dan test data
-X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, test_size=0.2, random_state=21)
-
+X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, test_size=0.2, random_state=1)
+# print (X_train, y_train, X_test, y_test)
 def delete_multiple_lines(n=1):
     """Delete the last line in the STDOUT."""
     for _ in range(n):
@@ -85,6 +85,7 @@ def knn(x_train, y_train, x_test, actual=pd.DataFrame(), k=3, mode='test'):
             y_pred = result_child['y'].mode()[0]
             # add y_pred to result
             y_result.loc[i] = [y_pred]
+        print(y_result)
             
         # get accuracy from actual
         if (actual.shape[0] == y_result.shape[0]):
@@ -109,13 +110,20 @@ for k in k_list:
     y_result.to_csv(f'result/knn_k_{k}.csv', index=False)
 
     # plot result and store to png
-    fig, ax = plt.subplots()
-    ax.scatter(data[data['A16'] == 1]['A2'], data[data['A16'] == 1]['A3'], c='red', marker='+', label="+")
-    ax.scatter(data[data['A16'] == 0]['A2'], data[data['A16'] == 0]['A3'], c='blue', marker='o', label="-")
-    ax.set_xlabel('A2')
-    ax.set_ylabel('A3')
-    ax.set_title(f'Dataset Visualization with K = {k}')
-    ax.legend()
+    fig, ax = plt.subplots(nrows=2, sharey=True)
+    ax[0].scatter(X_train[y_train == 1]['A2'], X_train[y_train == 1]['A3'], c='red', marker='+', label="+")
+    ax[0].scatter(X_train[y_train == 0]['A2'], X_train[y_train == 0]['A3'], c='blue', marker='o', label="-")
+    ax[0].set_xlabel('A2')
+    ax[0].set_ylabel('A3')
+    ax[0].set_title(f'Dataset Visualization with K = {k}')
+    ax[0].legend()
+    
+    ax[1].scatter(X_test[y_test == 1]['A2'], X_test[y_test == 1]['A3'], c='red', marker='+', label="+")
+    ax[1].scatter(X_test[y_test == 0]['A2'], X_test[y_test == 0]['A3'], c='blue', marker='o', label="-")
+    ax[1].set_xlabel('A2')
+    ax[1].set_ylabel('A3')
+    ax[1].set_title(f'Dataset Visualization with K = {k}')
+    ax[1].legend()
     plt.savefig(f'result/knn_k_{k}.png')
 
     print('\n')
